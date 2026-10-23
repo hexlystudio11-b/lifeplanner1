@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14161b">
+<link rel=preconnect href="https://fonts.googleapis.com"><link rel=preconnect href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel=stylesheet><title>Life Planner (Sample Data)</title>
+<style>
+:root{--bg:#f3f0ff;--s:#fff;--s2:#eee9ff;--b:#e2dbfa;--t:#1d1740;--m:#6d6890;--a:#7c5cff;--a2:#0ea5e9;--g:#10b981;--r:#f43f5e;--on:#fff;--f1:#7c5cff;--f2:#ff7a59;--f3:#0ea5e9;--f4:#f59e0b;--f5:#ec4899;--f6:#14b8a6;--f7:#84cc16;--f8:#6366f1;--fd:"Sora","Plus Jakarta Sans",system-ui,sans-serif;--sh:0 1px 2px rgba(60,40,140,.06),0 10px 28px rgba(60,40,140,.09)}
+[data-theme=dark]{--bg:#0f0d1f;--s:#19162e;--s2:#241f40;--b:#332d57;--t:#f3f0ff;--m:#a39fc7;--a:#9b82ff;--a2:#38bdf8;--g:#34d399;--r:#fb7185;--on:#fff;--sh:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.3)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--t);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;min-height:100vh}
+nav{width:196px;flex:none;position:sticky;top:0;height:100vh;overflow:auto;padding:18px 10px;background:var(--s);border-right:1px solid var(--b)}
+nav h3{margin:0 8px 14px;font:700 17px Georgia,serif;color:var(--a)}
+nav button{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--m);padding:9px 10px;border-radius:8px;font:inherit;cursor:pointer}
+nav button:hover{background:var(--s2)}nav button.on{background:var(--s2);color:var(--t);box-shadow:inset 3px 0 var(--a)}
+main{flex:1;min-width:0;padding:26px clamp(14px,3vw,36px) 60px;max-width:1100px}
+h1{font:700 28px Georgia,serif;margin:0 0 4px}h2{font-size:16px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+small,.m{color:var(--m)}small{font-weight:400;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:16px;margin-bottom:14px}.grid .card{margin:0}
+input,select,button,textarea{font:inherit;color:var(--t)}
+input,select{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:8px 10px;min-width:0}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--a2);outline-offset:1px}
+input[type=checkbox]{accent-color:var(--a);width:18px;height:18px;padding:0;flex:none}
+form{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}form input[type=text],form input:not([type]){flex:1 1 150px}
+.btn,.chips button{background:var(--a);color:var(--on);border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}
+.gh{background:var(--s2);color:var(--t);border:1px solid var(--b);border-radius:8px;padding:6px 12px;cursor:pointer}
+.x{background:none;border:0;color:var(--m);cursor:pointer;font-size:18px;padding:0 6px;margin-left:auto}.x:hover{color:var(--r)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.chips button{background:var(--s2);color:var(--m);border:1px solid var(--b)}.chips button.on{background:var(--a);color:var(--on);border-color:var(--a)}
+.row{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--b);cursor:pointer}.row:last-child{border:0}
+.row.dn span{text-decoration:line-through;color:var(--m)}
+.bar{height:8px;background:var(--s2);border-radius:5px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;border-radius:5px}
+.bar{height:8px}
+.nav2{display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap}.nav2 b{flex:1;min-width:140px;text-align:center}
+.mg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.mg>div{text-align:center;color:var(--m);font-size:12px}
+.cell{aspect-ratio:1;min-height:46px;background:var(--s);border:1px solid var(--b);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;padding:5px;text-align:left}
+.cell i{font-style:normal;font-size:11px;color:var(--a2)}.cell.t{border-color:var(--a)}.cell.s{background:var(--s2)}.cell.o{opacity:.35}
+.wk{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.stat{font:700 26px Georgia,serif}.pri1{border-left:3px solid var(--r);padding-left:8px}.pri3{border-left:3px solid var(--b);padding-left:8px}
+.tl{position:relative;height:864px;margin-left:44px;background:repeating-linear-gradient(var(--b) 0 1px,transparent 1px 36px)}
+.tl em{position:absolute;left:-44px;font:11px system-ui;color:var(--m);font-style:normal;margin-top:-7px}
+.blk{position:absolute;left:6px;right:6px;background:var(--s2);border-left:3px solid var(--a2);border-radius:6px;padding:2px 8px;font-size:13px;overflow:hidden;display:flex;gap:6px}
+.days{display:flex;gap:4px;flex-wrap:wrap}.days label{background:var(--s2);border:1px solid var(--b);border-radius:6px;padding:4px 8px;font-size:13px;cursor:pointer}.days input{display:none}.days label:has(input:checked){background:var(--a);color:var(--on)}
+.hab{display:grid;grid-template-columns:1fr repeat(7,34px) 44px 24px;gap:4px;align-items:center;padding:6px 0;border-bottom:1px solid var(--b)}
+.hab button.d{width:30px;height:30px;border-radius:8px;border:1px solid var(--b);background:var(--s2);cursor:pointer}.hab button.d.on{background:var(--g);border-color:var(--g)}.hab .h{font-size:11px;color:var(--m);text-align:center}
+.spark{width:100%;height:60px}.wr{display:flex;gap:6px;flex-wrap:wrap}.drop{width:30px;height:30px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:var(--s2);border:1px solid var(--b)}.drop.on{background:var(--a2);border-color:var(--a2)}
+.ml{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}.ml input{width:100%;margin-top:6px}
+table{width:100%;border-collapse:collapse}td,th{padding:6px 4px;border-bottom:1px solid var(--b);text-align:left;font-weight:400}
+#toast{position:fixed;left:50%;bottom:80px;transform:translate(-50%,20px);background:var(--s2);border:1px solid var(--a);padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:9}#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){body{flex-direction:column}
+nav{position:fixed;bottom:0;left:0;right:0;top:auto;width:100%;height:auto;display:flex;overflow-x:auto;padding:6px 6px calc(6px + env(safe-area-inset-bottom));border:0;border-top:1px solid var(--b);z-index:5}
+nav h3{display:none}nav button{flex-direction:column;align-items:center;gap:0;font-size:11px;padding:6px 10px;width:auto;flex:none}nav button.on{box-shadow:inset 0 3px var(--a)}
+main{padding:18px 14px calc(90px + env(safe-area-inset-bottom))}.hab{grid-template-columns:1fr repeat(7,30px) 22px 20px}.hab button.d{width:26px;height:26px}.hab .n{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+nav{width:222px;display:flex;flex-direction:column}nav .lg{display:flex;align-items:center;gap:10px;font:700 18px Georgia,serif;margin:2px 8px 16px}
+nav .lg i{width:30px;height:30px;border-radius:9px;background:var(--a);color:var(--on);display:grid;place-items:center;font-style:normal}
+nav .gl{font-size:12px;color:var(--m);margin:14px 10px 4px}nav .sp{flex:1}nav button.on{color:var(--a);background:var(--s2)}
+.card{border-radius:16px;box-shadow:var(--sh)}h1{font-size:30px}
+.dash{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:14px}.dash>.card{margin:0}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.tiles .card{margin:0}.tiles .stat{margin:2px 0}
+.qa{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.qa button{background:var(--s);border:1px solid var(--b);color:var(--t);border-radius:99px;padding:7px 14px;cursor:pointer;box-shadow:var(--sh)}.qa button:hover{border-color:var(--a);color:var(--a)}
+.hm{display:flex;gap:3px;margin-top:4px}.hm i{width:13px;height:13px;border-radius:4px;background:var(--s2)}.hm i.on{background:var(--g)}
+.rw{position:relative;width:124px;height:124px;flex:none}.rw>div{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1.2}
+.fx{display:flex;gap:16px;align-items:center}.lgd{flex:1;min-width:0;font-size:13px}.lgd div{display:flex;gap:8px;align-items:center;padding:2px 0}.lgd i{width:9px;height:9px;border-radius:50%;flex:none}.lgd b{margin-left:auto;font-weight:600}
+.mdl{border:1px solid var(--b);border-radius:18px;background:var(--s);color:var(--t);padding:22px;width:min(380px,92vw);box-shadow:var(--sh)}.mdl::backdrop{background:rgba(0,0,0,.45)}
+.mdl label{display:block;margin:10px 0;font-size:13px;color:var(--m)}.mdl input,.mdl select{width:100%;margin-top:4px}.mb{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+@media(max-width:1100px){.c4,.c5,.c7,.c8{grid-column:span 6}}
+@media(max-width:800px){nav{flex-direction:row}nav .lg,nav .gl,nav .sp{display:none}.tiles{grid-template-columns:1fr 1fr}.dash>*{grid-column:span 12!important}}
+
+body{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(900px 500px at 85% -10%,color-mix(in srgb,var(--f1) 20%,transparent),transparent),radial-gradient(700px 420px at -5% 105%,color-mix(in srgb,var(--f5) 15%,transparent),transparent),var(--bg);background-attachment:fixed}
+h1,h2,.stat,nav .lg{font-family:var(--fd)}h1{letter-spacing:-.02em}h2{font-size:15px}
+nav{background:color-mix(in srgb,var(--s) 88%,transparent);backdrop-filter:blur(10px)}
+nav .lg i{background:linear-gradient(135deg,var(--f1),var(--f5));color:#fff}
+nav button.on{background:linear-gradient(135deg,var(--f1),var(--f5));color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--f1) 40%,transparent)}
+.btn,.chips button.on{background:linear-gradient(135deg,var(--f1),var(--f5));color:#fff;border:0}
+.card{transition:transform .2s,box-shadow .2s}.dash .card:hover{transform:translateY(-3px)}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 28px;border-radius:24px;color:#fff;background:linear-gradient(120deg,#6d4aff,#c13fd8 55%,#ff6b8b);box-shadow:0 16px 40px color-mix(in srgb,var(--f1) 40%,transparent);position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.14)}.hero:before{right:-50px;top:-70px;width:240px;height:240px}.hero:after{right:140px;bottom:-90px;width:160px;height:160px}
+.hero h1{margin:0;font-size:clamp(24px,4vw,34px)}.hero p{margin:4px 0 0;opacity:.92}.hh{position:relative;z-index:1}
+.hs{position:relative;z-index:1;display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:16px;padding:10px 18px;text-align:center;margin-left:8px;backdrop-filter:blur(6px);font-size:12px}.hs b{display:block;font:800 26px var(--fd)}
+.tile{color:#fff;border:0;position:relative;overflow:hidden}.tile small{color:rgba(255,255,255,.88);font-weight:600}.tile .stat{color:#fff;font-size:34px}.tile .bar{background:rgba(255,255,255,.3)}.tile .bar i{background:#fff!important}
+.tile:after{content:"";position:absolute;right:-24px;top:-24px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.16)}
+.t1{background:linear-gradient(135deg,#7c5cff,#5b8cff)}.t2{background:linear-gradient(135deg,#10b981,#0ea5a5)}.t3{background:linear-gradient(135deg,#ff8a4c,#f43f5e)}.t4{background:linear-gradient(135deg,#0ea5e9,#6366f1)}
+.dash .card[class*=" k"]{border-top:4px solid var(--ac)}.k1{--ac:var(--f1)}.k2{--ac:var(--f4)}.k3{--ac:var(--f3)}.k4{--ac:var(--f5)}.k5{--ac:var(--f2)}.k6{--ac:var(--f6)}.k7{--ac:var(--f7)}.k8{--ac:var(--f8)}
+.qa button{font-weight:600;border-color:color-mix(in srgb,var(--c) 45%,var(--b));color:var(--c)}.qa button:hover{background:var(--c);color:#fff;border-color:var(--c)}
+.qa button:nth-child(1){--c:var(--f1)}.qa button:nth-child(2){--c:var(--f2)}.qa button:nth-child(3){--c:var(--f3)}.qa button:nth-child(4){--c:var(--f6)}.qa button:nth-child(5){--c:var(--f5)}
+.hm i.on{background:linear-gradient(135deg,var(--f6),var(--f7))}.bar i{background-image:linear-gradient(90deg,var(--f1),var(--f5))!important}
+.cell.t{border-color:var(--f1);box-shadow:0 0 0 2px color-mix(in srgb,var(--f1) 30%,transparent)}.cell.s{background:color-mix(in srgb,var(--f1) 14%,var(--s))}
+
+nav button{min-height:42px}nav em{font-style:normal}#tabbar,#fab{display:none}
+#fab{display:grid;place-items:center;position:fixed;right:20px;bottom:24px;width:56px;height:56px;border-radius:50%;border:0;color:#fff;font:400 32px/1 var(--fd);background:linear-gradient(135deg,var(--f1),var(--f5));box-shadow:0 10px 26px color-mix(in srgb,var(--f1) 55%,transparent);cursor:pointer;z-index:15;padding:0 0 3px}
+#fab:active{transform:scale(.94)}
+.sheet{padding:0;margin:auto auto 0;width:100%;max-width:520px;border-radius:22px 22px 0 0}.si{padding:20px 18px calc(20px + env(safe-area-inset-bottom))}.si h2{margin-bottom:14px}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sg button{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--b);border-radius:14px;padding:14px 6px;font-weight:600;font-size:13px;cursor:pointer;color:var(--t)}.sg button:hover{border-color:var(--f1)}.sg span{font-size:22px}
+.ds{display:grid;grid-template-columns:1fr 1fr;gap:18px}.ds .stat{margin:2px 0 8px}.ds .row{padding:5px 0}
+.row:hover{background:color-mix(in srgb,var(--f1) 6%,transparent)}.x{min-width:34px;min-height:34px}.nav2 .gh{min-width:42px;min-height:40px}.btn,.gh{min-height:40px}
+@media(min-width:601px){.sheet{margin:auto;border-radius:22px}}
+@media(max-width:1000px) and (min-width:801px){nav{width:70px;padding:16px 8px}nav em,nav .gl{display:none}nav .lg{justify-content:center;margin:0 0 12px}nav button{justify-content:center;padding:12px 0}nav button span{font-size:19px}}
+@media(max-width:800px){
+nav{display:none!important}body{display:block}
+main{padding:16px 14px calc(92px + env(safe-area-inset-bottom));max-width:100%}
+#tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;gap:2px;background:color-mix(in srgb,var(--s) 94%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--b);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+#tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:0;color:var(--m);font-size:11px;font-weight:600;min-height:52px;border-radius:14px;cursor:pointer}
+#tabbar button span{font-size:20px;line-height:1.1}#tabbar button.on{color:#fff;background:linear-gradient(135deg,var(--f1),var(--f5))}
+#fab{right:16px;bottom:calc(82px + env(safe-area-inset-bottom))}#toast{bottom:150px;width:max-content;max-width:90vw}
+input,select{font-size:16px}h1{font-size:26px}.row{padding:11px 0}input[type=checkbox]{width:22px;height:22px}
+.qa{flex-wrap:nowrap;overflow-x:auto;margin-right:-14px;padding-right:14px;scrollbar-width:none}.qa::-webkit-scrollbar{display:none}.qa button{flex:none;min-height:40px}
+.hero{padding:20px;border-radius:20px}.hs{margin:8px 8px 0 0}.tiles{grid-template-columns:1fr 1fr;gap:12px}.tile .stat{font-size:28px}.dash{gap:12px}.dash>*{grid-column:span 12!important}.dash .card:hover{transform:none}
+.ds{grid-template-columns:1fr}.fx{flex-wrap:wrap;justify-content:center}.card{padding:16px 14px}
+.hab{grid-template-columns:repeat(7,1fr) 34px 30px;gap:4px}.hab>span:first-child:empty{display:none}.hab .n{grid-column:1/-1;font-weight:600}.hab button.d{width:100%;max-width:40px;height:36px;justify-self:center}
+.mg{gap:3px}.cell{min-height:44px;padding:4px;border-radius:7px}.tl{margin-left:38px}.wk{grid-template-columns:1fr 1fr}.ml{grid-template-columns:1fr}}
+@media(max-width:600px){form input,form select,form .btn,form button{flex:1 1 100%!important;width:100%!important}form .days{width:100%}
+dialog.mdl:not(.sheet){margin:auto auto 0;width:100%;max-width:100%;border-radius:22px 22px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom))}.wk{grid-template-columns:1fr}.nav2 b{order:-1;flex-basis:100%}}
+@media(max-width:360px){.tile .stat{font-size:24px}.sg{grid-template-columns:1fr 1fr}}
+.demo{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--f4) 16%,var(--s));border:1px dashed var(--f4);border-radius:14px;padding:10px 14px;margin-bottom:14px;font-size:14px}.demo span{flex:1;min-width:200px}</style></head><body>
+<nav id="nav"></nav><main id="app"></main><div id="tabbar"></div><button id="fab" onclick="A.add()" aria-label="Quick add">+</button><div id="toast" role="status"></div>
+<script>
+const K='lifeplanner.demo.v1',$=s=>document.querySelector(s);
+const D={tasks:[],rec:[],goals:[],habits:[],blocks:{},tx:[],bud:{},debts:[],extra:0,sav:[],meals:{},groc:[],work:[],wt:[],wu:'kg',water:{},wg:8,cur:'$'};
+let S,ok=true;
+try{S=Object.assign({},D,JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){S=JSON.parse(JSON.stringify(D));ok=false}
+function toast(m){const t=$('#toast');t.textContent=m;t.className='on';clearTimeout(toast.h);toast.h=setTimeout(()=>t.className='',2600)}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){if(ok){ok=false;toast('Browser storage is blocked, so changes will not persist. Use Settings to export a backup.')}}}
+const pad=n=>String(n).padStart(2,'0'),iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const P=s=>{const[a,b,c]=s.split('-');return new Date(+a,b-1,+c)};
+const add=(s,n)=>{const d=P(s);d.setDate(d.getDate()+n);return iso(d)};
+const today=()=>iso(new Date()),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ORD=[1,2,3,4,5,6,0];
+const money=n=>(n<0?'-':'')+S.cur+Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:2});
+const sum=a=>a.reduce((s,x)=>s+x.amt,0),tm=t=>{const[a,b]=t.split(':');return +a*60+ +b};
+const fmt=(s,o)=>P(s).toLocaleDateString(undefined,o||{weekday:'long',month:'long',day:'numeric'});
+const wkStart=s=>add(s,-((P(s).getDay()+6)%7));
+const empty=t=>`<p class=m>${t}</p>`;
+const bar=(p,c)=>`<div class=bar><i style="width:${Math.min(100,Math.max(0,p||0))}%;background:${c||'var(--a)'}"></i></div>`;
+const fd=e=>{e.preventDefault();return Object.fromEntries(new FormData(e.target))};
+const V={tab:'dash',date:today(),cal:'month',bm:today().slice(0,7),sub:{tasks:'one',bud:'bud'}};
+const CATS=['Salary','Housing','Food','Transport','Bills','Health','Fun','Shopping','Savings','Other'];
+const dl=`<datalist id=cats>${CATS.map(c=>`<option value="${c}">`).join('')}</datalist>`;
+const chips=(pg,o)=>`<div class=chips>${o.map(([k,l])=>`<button class="${V.sub[pg]==k?'on':''}" onclick="A.sub('${pg}','${k}')">${l}</button>`).join('')}</div>`;
+
+function dayItems(d){const wd=P(d).getDay();
+ return[...S.tasks.filter(t=>t.date===d).map(t=>({k:'t',id:t.id,t:t.t,done:t.done,pri:t.pri})),
+ ...S.rec.filter(r=>r.days.includes(wd)).map(r=>({k:'r',id:r.id,t:r.t,time:r.time,done:!!r.done[d]}))]}
+const row=(i,d)=>`<label class="row ${i.done?'dn':''}"><input type=checkbox ${i.done?'checked':''} onchange="A.tog('${i.k}','${i.id}','${d}')"><span class="pri${i.pri||2}">${esc(i.t)}</span>${i.time?`<small>${i.time}</small>`:''}${i.k=='r'?'<small>repeats</small>':''}${i.k=='t'?`<button class=x onclick="event.preventDefault();A.del('tasks','${i.id}')" aria-label="Delete">×</button>`:''}</label>`;
+const streak=h=>{let d=today(),n=0;if(!h.log[d])d=add(d,-1);while(h.log[d]){n++;d=add(d,-1)}return n};
+const spark=a=>{if(a.length<2)return'';const mn=Math.min(...a),mx=Math.max(...a),r=mx-mn||1;return`<svg viewBox="0 0 200 50" class=spark preserveAspectRatio=none><polyline fill=none stroke="#14b8a6" stroke-width=2 points="${a.map((v,i)=>(i/(a.length-1)*196+2)+','+(46-(v-mn)/r*42)).join(' ')}"/></svg>`};
+const addForm=(d)=>`<form onsubmit="A.addTask(event)"><input name=t placeholder="New task" required maxlength=120><input type=hidden name=date value="${d}"><select name=pri><option value=2>Normal</option><option value=1>High</option><option value=3>Low</option></select><button class=btn>Add task</button></form>`;
+
+function sim(ex){let d=S.debts.filter(x=>x.bal>0).map(x=>({b:x.bal,r:x.apr/1200,m:x.min}));if(!d.length)return{m:0,ti:0};
+ const T=d.reduce((s,x)=>s+x.m,0)+ex;let m=0,ti=0;
+ while(d.some(x=>x.b>0)&&m<1200){m++;d.forEach(x=>{if(x.b>0){const i=x.b*x.r;ti+=i;x.b+=i}});let left=T;
+  d.forEach(x=>{if(x.b>0){const p=Math.min(x.m,x.b);x.b-=p;left-=p}});
+  [...d].sort((a,b)=>b.r-a.r).forEach(x=>{if(left>0&&x.b>0){const p=Math.min(left,x.b);x.b-=p;left-=p}});d.forEach(x=>{if(x.b<.005)x.b=0})}
+ return d.some(x=>x.b>0)?null:{m,ti}}
+
+const A={
+tab(t){V.tab=t;draw();scrollTo(0,0)},sub(p,x){V.sub[p]=x;draw()},
+go(d){V.date=d;V.cal='day';V.tab='cal';draw();scrollTo(0,0)},
+mode(m){V.cal=m;draw()},today(){V.date=today();draw()},
+shift(n){if(V.cal=='month'){const d=P(V.date);d.setDate(1);d.setMonth(d.getMonth()+n);V.date=iso(d)}else V.date=add(V.date,n*(V.cal=='week'?7:1));draw()},
+dshift(n){V.date=add(V.date,n);draw()},bm(n){const[y,m]=V.bm.split('-');V.bm=iso(new Date(+y,m-1+n,1)).slice(0,7);draw()},
+del(l,id){S[l]=S[l].filter(x=>x.id!=id);save();draw()},
+tog(k,id,d){if(k=='t'){const t=S.tasks.find(x=>x.id==id);t.done=!t.done}else{const r=S.rec.find(x=>x.id==id);r.done[d]?delete r.done[d]:r.done[d]=1}save();draw()},
+addTask(e){const f=fd(e);S.tasks.push({id:uid(),t:f.t.trim(),date:f.date||today(),done:false,pri:f.pri});save();draw()},
+addRec(e){e.preventDefault();const f=new FormData(e.target),days=f.getAll('d').map(Number);if(!days.length)return toast('Choose at least one day');S.rec.push({id:uid(),t:f.get('t').trim(),days,time:f.get('time'),done:{}});save();draw()},
+addBlock(e){const f=fd(e);if(tm(f.e)<=tm(f.s))return toast('End time must be after start time');(S.blocks[V.date]??=[]).push({id:uid(),s:f.s,e:f.e,t:f.t.trim()});save();draw()},
+delBlock(id){S.blocks[V.date]=S.blocks[V.date].filter(x=>x.id!=id);save();draw()},
+addGoal(e){const f=fd(e);S.goals.push({id:uid(),t:f.t.trim(),target:+f.target||100,cur:0,unit:f.unit,due:f.due});save();draw()},
+goalSet(id,v){S.goals.find(x=>x.id==id).cur=+v||0;save();draw()},
+addHab(e){const f=fd(e);S.habits.push({id:uid(),t:f.t.trim(),log:{}});save();draw()},
+hab(id,d){const h=S.habits.find(x=>x.id==id);h.log[d]?delete h.log[d]:h.log[d]=1;save();draw()},
+addTx(e){const f=fd(e);S.tx.push({id:uid(),d:f.d,t:f.t.trim(),amt:Math.abs(+f.amt),cat:f.cat.trim()||'Other',type:f.type});save();draw()},
+setBud(e){const f=fd(e);S.bud[f.cat.trim()]=Math.abs(+f.lim);save();draw()},delBud(c){delete S.bud[c];save();draw()},
+addDebt(e){const f=fd(e);S.debts.push({id:uid(),n:f.n.trim(),bal:+f.bal,apr:+f.apr||0,min:+f.min||0});save();draw()},
+extra(v){S.extra=Math.max(0,+v||0);save();draw()},
+addSav(e){const f=fd(e);S.sav.push({id:uid(),n:f.n.trim(),target:+f.target,cur:0});save();draw()},
+dep(e,id){const f=fd(e);S.sav.find(x=>x.id==id).cur+=+f.a;save();draw()},
+meal(d,s,v){(S.meals[d]??={})[s]=v;save()},
+addGroc(e){const f=fd(e);S.groc.push({id:uid(),t:f.t.trim(),done:false});save();draw()},
+togGroc(id){const g=S.groc.find(x=>x.id==id);g.done=!g.done;save();draw()},clearGroc(){S.groc=S.groc.filter(x=>!x.done);save();draw()},
+addWork(e){const f=fd(e);S.work.unshift({id:uid(),d:f.d,t:f.t.trim(),min:+f.min||0,note:f.note});S.work.sort((a,b)=>b.d.localeCompare(a.d));save();draw()},
+addWt(e){const f=fd(e),v=+f.v,kg=S.wu=='kg'?v:v/2.20462;S.wt=S.wt.filter(x=>x.d!=f.d);S.wt.push({d:f.d,kg});S.wt.sort((a,b)=>a.d.localeCompare(b.d));save();draw()},
+delWt(d){S.wt=S.wt.filter(x=>x.d!=d);save();draw()},unit(u){S.wu=u;save();draw()},
+wat(n){const t=today();S.water[t]=Math.max(0,(S.water[t]||0)+n);save();draw()},wgoal(v){S.wg=Math.max(1,+v||8);save();draw()},
+cur(v){S.cur=v;save();draw()},
+exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));a.download='life-planner-backup-'+today()+'.json';a.click()},
+imp(inp){const r=new FileReader();r.onload=()=>{try{S=Object.assign({},D,JSON.parse(r.result));save();draw();toast('Backup restored')}catch(e){toast('That file is not a valid backup')}};inp.files[0]&&r.readAsText(inp.files[0])},
+reset(){if(confirm('Delete all planner data on this device? This cannot be undone.')){S=JSON.parse(JSON.stringify(D));save();draw()}}
+};
+
+const PG={};
+const COL=['#7c5cff','#ff7a59','#0ea5e9','#f59e0b','#ec4899','#14b8a6'];
+const donut=(it,tot)=>{let o=0;const C=251.3;return`<svg viewBox="0 0 100 100" width=124 height=124 style="transform:rotate(-90deg)"><circle cx=50 cy=50 r=40 fill=none stroke="var(--s2)" stroke-width=14 />${it.map(([n,v],i)=>{const l=v/tot*C,c=`<circle cx=50 cy=50 r=40 fill=none stroke="${COL[i%6]}" stroke-width=14 stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-o}"/>`;o+=l;return c}).join('')}</svg>`};
+const ring=(p,c)=>`<svg viewBox="0 0 100 100" width=124 height=124 style="transform:rotate(-90deg)"><circle cx=50 cy=50 r=40 fill=none stroke="var(--s2)" stroke-width=12 /><circle cx=50 cy=50 r=40 fill=none stroke="${c}" stroke-linecap=round stroke-width=12 stroke-dasharray="${Math.min(1,p)*251.3} 251.3"/></svg>`;
+PG.dash=()=>{const t=today(),h=new Date().getHours(),it=dayItems(t),dn=it.filter(i=>i.done).length,ws=wkStart(t),wk=Array.from({length:7},(_,i)=>dayItems(add(ws,i))).flat(),wd=wk.filter(x=>x.done).length,l7=Array.from({length:7},(_,i)=>add(t,i-6)),l14=Array.from({length:14},(_,i)=>add(t,i-13)),
+ hr=S.habits.length?Math.round(S.habits.reduce((n,x)=>n+l7.filter(d=>x.log[d]).length,0)/(S.habits.length*7)*100):0,
+ wo=S.work.filter(x=>x.d>=ws&&x.d<=add(ws,6)).length,wa=Math.round(l7.reduce((n,d)=>n+(S.water[d]||0),0)/7*10)/10,
+ m=t.slice(0,7),mt=S.tx.filter(x=>x.d.startsWith(m)),inc=sum(mt.filter(x=>x.type=='in')),out=sum(mt.filter(x=>x.type=='out')),
+ cats=Object.entries(mt.filter(x=>x.type=='out').reduce((o,x)=>(o[x.cat]=(o[x.cat]||0)+x.amt,o),{})).sort((a,b)=>b[1]-a[1]).slice(0,5),
+ w=S.water[t]||0,L=S.wt,u=S.wu,cv=k=>(u=='kg'?k:k*2.20462).toFixed(1),ml=S.meals[t]||{},debt=S.debts.reduce((n,x)=>n+x.bal,0),sv=S.sav.reduce((n,x)=>n+x.cur,0),svt=S.sav.reduce((n,x)=>n+x.target,0);
+ return`${S.demo?'<div class=demo><span>🎨 You are viewing <b>sample data</b> so you can explore every page. Try adding, editing and ticking things off.</span></div>':''}<div class=hero><div class=hh><h1>${h<12?'Good morning':h<18?'Good afternoon':'Good evening'}${S.name?', '+esc(S.name):''} 👋</h1><p>${fmt(t)} · make today count</p></div><div class=hh><span class=hs><b>${dn}/${it.length}</b>tasks done</span><span class=hs><b>${w}/${S.wg}</b>glasses</span></div></div>
+<div class=qa><button onclick="A.qa('task')">+ Task</button><button onclick="A.qa('exp')">+ Expense</button><button onclick="A.wat(1)">+ Water</button><button onclick="A.qa('wt')">+ Weigh-in</button><button onclick="A.qa('wo')">+ Workout</button></div>
+<div class=dash><div class="c12 tiles">
+<div class="card tile t1"><small>📋 Tasks this week</small><div class=stat>${wd}/${wk.length}</div>${bar(wk.length?wd/wk.length*100:0)}</div>
+<div class="card tile t2"><small>🔥 Habits, last 7 days</small><div class=stat>${hr}%</div>${bar(hr,'var(--g)')}</div>
+<div class="card tile t3"><small>💪 Workouts this week</small><div class=stat>${wo}</div>${bar(wo/4*100,'var(--a2)')}</div>
+<div class="card tile t4"><small>💧 Water, daily average</small><div class=stat>${wa}</div>${bar(wa/S.wg*100,'var(--a2)')}</div></div>
+<section class="card c5 k1"><h2>📅 Today <small>${dn} of ${it.length} done · <a href="#" onclick="A.go('${t}');return false" style="color:var(--a)">Open day</a></small></h2>${it.map(i=>row(i,t)).join('')||empty('Nothing planned. Use + Task above.')}</section>
+<section class="card c4 k2"><h2>💰 Budget <small>${fmt(t,{month:'long'})}</small></h2>${cats.length?`<div class=fx><div class=rw>${donut(cats,out)}<div><b>${money(out)}</b><small>spent</small></div></div><div class=lgd>${cats.map(([n,v],i)=>`<div><i style="background:${COL[i%6]}"></i>${esc(n)}<b>${money(v)}</b></div>`).join('')}</div></div>`:empty('Add expenses to see where your money goes.')}<p class=m style="margin:10px 0 0">Income ${money(inc)} · Left <b style="color:${inc-out<0?'var(--r)':'var(--g)'}">${money(inc-out)}</b></p></section>
+<section class="card c3 k3"><h2>💧 Water <small>${w}/${S.wg}</small></h2><div class=fx style="justify-content:center"><div class=rw>${ring(w/S.wg,'var(--a2)')}<div><b class=stat>${w}</b><small>glasses</small></div></div></div><div style="display:flex;gap:8px;justify-content:center;margin-top:10px"><button class=gh onclick="A.wat(-1)">−</button><button class=btn onclick="A.wat(1)">+ Glass</button></div></section>
+<section class="card c4 k4"><h2>🎯 Goals <small><a href="#" onclick="A.tab('goals');return false" style="color:var(--a)">All</a></small></h2>${S.goals.slice(0,4).map(g=>`<div style="margin-bottom:8px">${esc(g.t)} <small>${Math.round(g.cur/g.target*100)}%</small>${bar(g.cur/g.target*100)}</div>`).join('')||empty('Set a goal to keep it in sight.')}</section>
+<section class="card c4 k5"><h2>🔥 Habits <small>last 14 days</small></h2>${S.habits.slice(0,5).map(x=>`<div style="margin-bottom:8px">${esc(x.t)} <small>${streak(x)} day streak</small><div class=hm>${l14.map(d=>`<i class="${x.log[d]?'on':''}"></i>`).join('')}</div></div>`).join('')||empty('Track a habit to see your streak.')}</section>
+<section class="card c4 k6"><h2>⚖️ Weight <small>${u}</small></h2>${L.length?`<div class=stat>${cv(L[L.length-1].kg)} <small>${u}</small></div>${spark(L.slice(-30).map(x=>x.kg))}`:empty('Log a weigh-in to see your trend.')}</section>
+<section class="card c4 k7"><h2>🥗 Meals today</h2>${[['b','Breakfast'],['l','Lunch'],['d','Dinner'],['s','Snack']].map(([k,n])=>`<div class=row style="cursor:default"><small style="width:70px">${n}</small>${esc(ml[k]||'—')}</div>`).join('')}</section>
+<section class="card c8 k8"><h2>🏦 Debt and savings <small><a href="#" onclick="A.goBud('debt');return false" style="color:var(--a)">Manage</a></small></h2><div class=ds>
+<div><small>Total debt</small><div class=stat style="color:${debt?'var(--r)':'var(--g)'}">${money(debt)}</div>${S.debts.length?S.debts.slice(0,3).map(d=>`<div class=row style="cursor:default">${esc(d.n)}<b style="margin-left:auto">${money(d.bal)}</b></div>`).join(''):`<p class=m>No debts tracked yet.</p><button class=gh onclick="A.goBud('debt')">+ Add a debt</button>`}</div>
+<div><small>Total saved</small><div class=stat style="color:var(--g)">${money(sv)}</div>${S.sav.length?S.sav.slice(0,3).map(g=>`<div style="margin-bottom:6px">${esc(g.n)} <small>${money(g.cur)} / ${money(g.target)}</small>${bar(g.cur/g.target*100,'var(--g)')}</div>`).join(''):`<p class=m>No savings goals yet.</p><button class=gh onclick="A.goBud('sav')">+ Add a goal</button>`}</div></div></section></div>`};
+PG.cal=()=>{const m=V.cal,lbl=m=='month'?fmt(V.date,{month:'long',year:'numeric'}):m=='week'?fmt(wkStart(V.date),{month:'short',day:'numeric'})+' – '+fmt(add(wkStart(V.date),6),{month:'short',day:'numeric'}):fmt(V.date);
+ let body='';
+ if(m=='month'){const f=P(V.date);f.setDate(1);const off=(f.getDay()+6)%7,n=new Date(f.getFullYear(),f.getMonth()+1,0).getDate();body=`<div class=mg>${ORD.map(i=>`<div>${DN[i]}</div>`).join('')}${Array(off).fill('<span></span>').join('')}${Array.from({length:n},(_,i)=>{const d=iso(new Date(f.getFullYear(),f.getMonth(),i+1)),it=dayItems(d),c=it.filter(x=>x.done).length;return`<button class="cell ${d==today()?'t':''} ${d==V.date?'s':''}" onclick="A.go('${d}')"><b>${i+1}</b>${it.length?`<i>${c}/${it.length}</i>`:''}</button>`}).join('')}</div>`}
+ else if(m=='week'){const s=wkStart(V.date);body=`<div class=wk>${Array.from({length:7},(_,i)=>{const d=add(s,i);return`<section class=card style="margin:0"><h2><a href="#" onclick="A.go('${d}');return false" style="color:${d==today()?'var(--a)':'inherit'}">${fmt(d,{weekday:'short',day:'numeric'})}</a></h2>${dayItems(d).map(x=>row(x,d)).join('')||'<small>Free</small>'}</section>`}).join('')}</div>`}
+ else{const bl=(S.blocks[V.date]||[]).slice().sort((a,b)=>tm(a.s)-tm(b.s));body=`<section class=card>${dayItems(V.date).map(x=>row(x,V.date)).join('')||empty('No tasks this day.')}<br>${addForm(V.date)}</section><section class=card><h2>Time blocks <button class=gh onclick="A.tab('blocks')">Open planner</button></h2>${bl.map(b=>`<div class=row style="cursor:default"><small>${b.s}–${b.e}</small> ${esc(b.t)}</div>`).join('')||empty('No time blocks.')}</section>`}
+ return`<h1>Calendar</h1>${chips('x',[]).replace(/.*/,'')}<div class=chips>${['month','week','day'].map(x=>`<button class="${m==x?'on':''}" onclick="A.mode('${x}')">${x[0].toUpperCase()+x.slice(1)}</button>`).join('')}</div><div class=nav2><button class=gh onclick="A.shift(-1)" aria-label=Previous>‹</button><b>${lbl}</b><button class=gh onclick="A.shift(1)" aria-label=Next>›</button><button class=gh onclick="A.today()">Today</button></div>${body}`};
+
+PG.blocks=()=>{const bl=S.blocks[V.date]||[];
+ return`<h1>Time blocks</h1><div class=nav2><button class=gh onclick="A.dshift(-1)">‹</button><b>${fmt(V.date)}</b><button class=gh onclick="A.dshift(1)">›</button><button class=gh onclick="A.today()">Today</button></div>
+<section class=card><form onsubmit="A.addBlock(event)"><input type=time name=s value="09:00" required><input type=time name=e value="10:00" required><input name=t placeholder="What will you focus on?" required maxlength=80><button class=btn>Add block</button></form>
+<div class=tl>${Array.from({length:24},(_,h)=>`<em style="top:${h*36}px">${pad(h)}:00</em>`).join('')}${bl.map(b=>`<div class=blk style="top:${tm(b.s)*.6}px;height:${Math.max(20,(tm(b.e)-tm(b.s))*.6)}px"><span>${b.s}–${b.e}</span><b style="font-weight:600">${esc(b.t)}</b><button class=x onclick="A.delBlock('${b.id}')" aria-label=Delete>×</button></div>`).join('')}</div></section>`};
+
+PG.tasks=()=>{const s=V.sub.tasks;let b='';
+ if(s=='one'){const o=S.tasks.filter(t=>!t.done).sort((a,b)=>a.date.localeCompare(b.date)||a.pri-b.pri),d=S.tasks.filter(t=>t.done);
+  b=`<section class=card><form onsubmit="A.addTask(event)"><input name=t placeholder="New task" required maxlength=120><input type=date name=date value="${today()}"><select name=pri><option value=2>Normal</option><option value=1>High</option><option value=3>Low</option></select><button class=btn>Add task</button></form>
+${o.map(t=>`<div class=row style="cursor:default"><input type=checkbox onchange="A.tog('t','${t.id}')"><span class=pri${t.pri}>${esc(t.t)}</span><small>${fmt(t.date,{month:'short',day:'numeric'})}${t.date<today()?' · overdue':''}</small><button class=x onclick="A.del('tasks','${t.id}')">×</button></div>`).join('')||empty('All clear. Add a task above.')}</section>
+${d.length?`<section class=card><h2>Completed <small>${d.length}</small></h2>${d.map(t=>row({k:'t',id:t.id,t:t.t,done:true,pri:t.pri},t.date)).join('')}</section>`:''}`}
+ if(s=='rec')b=`<section class=card><form onsubmit="A.addRec(event)"><input name=t placeholder="Recurring task, e.g. Take out bins" required maxlength=100><input type=time name=time><div class=days style="width:100%">${ORD.map(i=>`<label>${DN[i]}<input type=checkbox name=d value=${i}></label>`).join('')}</div><button class=btn>Add recurring task</button></form>
+${S.rec.map(r=>`<div class=row style="cursor:default"><span>${esc(r.t)}</span><small>${r.days.slice().sort((a,b)=>ORD.indexOf(a)-ORD.indexOf(b)).map(i=>DN[i]).join(', ')}${r.time?' · '+r.time:''}</small><button class=x onclick="A.del('rec','${r.id}')">×</button></div>`).join('')||empty('Routines you repeat each week live here.')}</section>`;
+ if(s=='sched')b=`<div class=wk>${ORD.map(i=>`<section class=card style="margin:0"><h2>${DN[i]}</h2>${S.rec.filter(r=>r.days.includes(i)).sort((a,b)=>(a.time||'99').localeCompare(b.time||'99')).map(r=>`<div class=row style="cursor:default"><small>${r.time||'any'}</small>${esc(r.t)}</div>`).join('')||'<small>Nothing scheduled</small>'}</section>`).join('')}</div>`;
+ return`<h1>Tasks</h1>${chips('tasks',[['one','One-time'],['rec','Recurring'],['sched','Weekly schedule']])}${b}`};
+
+PG.goals=()=>`<h1>Goals</h1><section class=card><form onsubmit="A.addGoal(event)"><input name=t placeholder="Goal, e.g. Read 20 books" required maxlength=100><input type=number name=target placeholder=Target min=1 step=any required style="width:90px"><input name=unit placeholder="Unit" style="width:90px" maxlength=14><input type=date name=due><button class=btn>Add goal</button></form></section>
+${S.goals.map(g=>`<section class=card><h2>${esc(g.t)}<button class=x onclick="A.del('goals','${g.id}')">×</button></h2>${bar(g.cur/g.target*100,g.cur>=g.target?'var(--g)':'var(--a)')}<div class=nav2 style="margin:4px 0"><small>${Math.round(g.cur/g.target*100)}%${g.due?' · due '+fmt(g.due,{month:'short',day:'numeric',year:'numeric'}):''}</small><span style="margin-left:auto">Progress <input type=number value="${g.cur}" step=any style="width:90px" onchange="A.goalSet('${g.id}',this.value)"> of ${g.target} ${esc(g.unit)}</span></div></section>`).join('')||empty('Set a goal to keep it in sight.')}`;
+
+PG.habits=()=>{const days=Array.from({length:7},(_,i)=>add(today(),i-6));
+ return`<h1>Habits</h1><section class=card><form onsubmit="A.addHab(event)"><input name=t placeholder="New habit, e.g. Walk 20 minutes" required maxlength=80><button class=btn>Add habit</button></form>
+${S.habits.length?`<div class=hab><span></span>${days.map(d=>`<span class=h>${DN[P(d).getDay()][0]}</span>`).join('')}<span class=h>Streak</span><span></span></div>`:empty('Habits you track appear here with a 7-day view.')}
+${S.habits.map(h=>`<div class=hab><span class=n>${esc(h.t)}</span>${days.map(d=>`<button class="d ${h.log[d]?'on':''}" onclick="A.hab('${h.id}','${d}')" aria-label="${d}"></button>`).join('')}<small>${streak(h)}</small><button class=x onclick="A.del('habits','${h.id}')">×</button></div>`).join('')}</section>`};
+
+function budPg(){const mt=S.tx.filter(x=>x.d.startsWith(V.bm)).sort((a,b)=>b.d.localeCompare(a.d)),inc=sum(mt.filter(x=>x.type=='in')),out=sum(mt.filter(x=>x.type=='out'));
+ return`<div class=nav2><button class=gh onclick="A.bm(-1)">‹</button><b>${fmt(V.bm+'-01',{month:'long',year:'numeric'})}</b><button class=gh onclick="A.bm(1)">›</button></div>
+<div class=grid style="margin-top:0"><div class=card><small>Income</small><div class=stat style="color:var(--g)">${money(inc)}</div></div><div class=card><small>Spent</small><div class=stat style="color:var(--r)">${money(out)}</div></div><div class=card><small>Left</small><div class=stat>${money(inc-out)}</div></div></div>
+<section class=card style="margin-top:14px"><h2>Add transaction</h2>${dl}<form onsubmit="A.addTx(event)"><select name=type><option value=out>Expense</option><option value=in>Income</option></select><input type=date name=d value="${V.bm==today().slice(0,7)?today():V.bm+'-01'}" required><input name=t placeholder=Description required maxlength=60><input name=cat list=cats placeholder=Category style="width:120px"><input type=number name=amt step=0.01 min=0 placeholder=Amount required style="width:100px"><button class=btn>Add</button></form></section>
+<section class=card><h2>Category budgets</h2><form onsubmit="A.setBud(event)"><input name=cat list=cats placeholder="Category" required style="width:140px"><input type=number name=lim min=0 step=0.01 placeholder="Monthly limit" required><button class=btn>Set budget</button></form>
+${Object.entries(S.bud).map(([c,l])=>{const sp=sum(mt.filter(x=>x.type=='out'&&x.cat.toLowerCase()==c.toLowerCase()));return`<div>${esc(c)} <small>${money(sp)} of ${money(l)}</small><button class=x data-k="${esc(c)}" onclick="A.delBud(this.dataset.k)">×</button>${bar(sp/l*100,sp>l?'var(--r)':'var(--g)')}</div>`}).join('')||empty('Set a limit to see how much of it you have used.')}</section>
+<section class=card><h2>Transactions</h2>${mt.map(x=>`<div class=row style="cursor:default"><small>${x.d.slice(8)}</small><span>${esc(x.t)} <small>${esc(x.cat)}</small></span><b style="margin-left:auto;color:${x.type=='in'?'var(--g)':'var(--t)'}">${x.type=='in'?'+':'−'}${money(x.amt)}</b><button class=x onclick="A.del('tx','${x.id}')">×</button></div>`).join('')||empty('No transactions this month.')}</section>`}
+function debtPg(){const a=sim(S.extra),b=sim(0),dt=m=>fmt(iso(new Date(new Date().getFullYear(),new Date().getMonth()+m,1)),{month:'long',year:'numeric'});
+ return`<section class=card><form onsubmit="A.addDebt(event)"><input name=n placeholder="Debt name" required maxlength=50><input type=number name=bal min=0 step=0.01 placeholder=Balance required style="width:100px"><input type=number name=apr min=0 step=0.01 placeholder="APR %" style="width:90px"><input type=number name=min min=0 step=0.01 placeholder="Min / month" required style="width:110px"><button class=btn>Add debt</button></form>
+${S.debts.map(d=>`<div class=row style="cursor:default"><span>${esc(d.n)}</span><small>${d.apr}% · min ${money(d.min)}</small><b style="margin-left:auto">${money(d.bal)}</b><button class=x onclick="A.del('debts','${d.id}')">×</button></div>`).join('')||empty('Add your debts to see a payoff plan.')}</section>
+${S.debts.length?`<section class=card><h2>Payoff plan <small>highest interest paid first</small></h2><label>Extra payment per month <input type=number min=0 step=1 value="${S.extra}" onchange="A.extra(this.value)" style="width:110px"></label>
+${a?`<p>Debt free by <b>${dt(a.m)}</b> (${a.m} months), paying ${money(a.ti)} in interest.</p>${b&&S.extra>0?`<p class=m>Minimums only: ${b.m} months and ${money(b.ti)} interest. Your extra saves ${money(b.ti-a.ti)}.</p>`:''}`:'<p style="color:var(--r)">Minimum payments do not cover the interest. Increase a payment to see a payoff date.</p>'}</section>`:''}`}
+function savPg(){return`<section class=card><form onsubmit="A.addSav(event)"><input name=n placeholder="Savings goal, e.g. Emergency fund" required maxlength=60><input type=number name=target min=1 step=0.01 placeholder=Target required style="width:110px"><button class=btn>Add</button></form></section>
+${S.sav.map(g=>`<section class=card><h2>${esc(g.n)}<button class=x onclick="A.del('sav','${g.id}')">×</button></h2>${bar(g.cur/g.target*100,'var(--g)')}<small>${money(g.cur)} of ${money(g.target)} · ${Math.round(g.cur/g.target*100)}%</small><form onsubmit="A.dep(event,'${g.id}')" style="margin:8px 0 0"><input type=number name=a step=0.01 placeholder="Amount (negative to withdraw)" required><button class=btn>Update</button></form></section>`).join('')||empty('Create a savings goal to track it.')}`}
+PG.bud=()=>`<h1>Money</h1>${chips('bud',[['bud','Budget'],['debt','Debt'],['sav','Savings']])}${{bud:budPg,debt:debtPg,sav:savPg}[V.sub.bud]()}`;
+
+PG.meals=()=>{const s=wkStart(V.date),SL=[['b','Breakfast'],['l','Lunch'],['d','Dinner'],['s','Snack']];
+ return`<h1>Meals</h1><div class=nav2><button class=gh onclick="A.shift2(-7)">‹</button><b>${fmt(s,{month:'short',day:'numeric'})} – ${fmt(add(s,6),{month:'short',day:'numeric'})}</b><button class=gh onclick="A.shift2(7)">›</button></div>
+<div class=ml>${Array.from({length:7},(_,i)=>{const d=add(s,i),m=S.meals[d]||{};return`<section class=card style="margin:0"><h2 style="color:${d==today()?'var(--a)':'inherit'}">${fmt(d,{weekday:'long',day:'numeric'})}</h2>${SL.map(([k,n])=>`<small>${n}</small><input value="${esc(m[k]||'')}" onchange="A.meal('${d}','${k}',this.value)" maxlength=80>`).join('')}</section>`}).join('')}</div>
+<section class=card style="margin-top:14px"><h2>Grocery list <button class=gh onclick="A.clearGroc()">Clear checked</button></h2><form onsubmit="A.addGroc(event)"><input name=t placeholder="Add item" required maxlength=60><button class=btn>Add</button></form>${S.groc.map(g=>`<label class="row ${g.done?'dn':''}"><input type=checkbox ${g.done?'checked':''} onchange="A.togGroc('${g.id}')"><span>${esc(g.t)}</span><button class=x onclick="event.preventDefault();A.del('groc','${g.id}')">×</button></label>`).join('')||empty('Your list is empty.')}</section>`};
+A.shift2=n=>{V.date=add(V.date,n);draw()};
+
+PG.fit=()=>{const t=today(),w=S.water[t]||0,L=S.wt,u=S.wu,cv=k=>(u=='kg'?k:k*2.20462).toFixed(1);
+ return`<h1>Fitness</h1><div class=grid>
+<section class=card><h2>Hydration <small>goal <input type=number min=1 value="${S.wg}" style="width:60px;padding:2px 6px" onchange="A.wgoal(this.value)"> glasses</small></h2><div class=wr>${Array.from({length:Math.max(S.wg,w)},(_,i)=>`<span class="drop ${i<w?'on':''}"></span>`).join('')}</div><p><b>${w}</b> of ${S.wg} today</p><button class=gh onclick="A.wat(-1)">−</button> <button class=btn onclick="A.wat(1)">Add a glass</button>
+<p class=m>Last 7 days: ${Array.from({length:7},(_,i)=>S.water[add(t,i-6)]||0).join(' · ')}</p></section>
+<section class=card><h2>Weight <span><button class="gh" onclick="A.unit('kg')" style="${u=='kg'?'border-color:var(--a)':''}">kg</button> <button class=gh onclick="A.unit('lb')" style="${u=='lb'?'border-color:var(--a)':''}">lb</button></span></h2><form onsubmit="A.addWt(event)"><input type=date name=d value="${t}" required><input type=number name=v step=0.1 min=1 placeholder="${u}" required style="width:90px"><button class=btn>Log</button></form>${spark(L.slice(-30).map(x=>x.kg))}
+${L.length?`<p><b class=stat>${cv(L[L.length-1].kg)} ${u}</b> ${L.length>1?`<small>${(L[L.length-1].kg-L[0].kg>0?'+':'')+cv(L[L.length-1].kg-L[0].kg+(u=='kg'?0:0)).replace(/^-?/,m=>m)} ${u} since ${L[0].d}</small>`:''}</p>`:empty('Log your first weigh-in.')}
+${L.slice(-5).reverse().map(x=>`<div class=row style="cursor:default"><small>${x.d}</small>${cv(x.kg)} ${u}<button class=x onclick="A.delWt('${x.d}')">×</button></div>`).join('')}</section></div>
+<section class=card style="margin-top:14px"><h2>Workouts</h2><form onsubmit="A.addWork(event)"><input type=date name=d value="${t}" required><input name=t placeholder="Workout, e.g. Run" required maxlength=50><input type=number name=min min=1 placeholder=Minutes style="width:90px"><input name=note placeholder=Notes maxlength=100><button class=btn>Log workout</button></form>${S.work.slice(0,15).map(x=>`<div class=row style="cursor:default"><small>${fmt(x.d,{month:'short',day:'numeric'})}</small><span>${esc(x.t)} <small>${x.min} min ${esc(x.note)}</small></span><button class=x onclick="A.del('work','${x.id}')">×</button></div>`).join('')||empty('No workouts logged.')}</section>`};
+PG.set=()=>`<h1>Settings</h1><section class=card><h2>Profile</h2><input value="${esc(S.name)}" placeholder="Your name" maxlength=30 onchange="A.name(this.value)"></section><section class=card><h2>Currency</h2><select onchange="A.cur(this.value)">${['$','€','£','¥','₹','Rs ','₦'].map(c=>`<option ${c==S.cur?'selected':''}>${c}</option>`).join('')}</select></section>
+<section class=card><h2>Sample data</h2><p class=m>This is a preview with sample data. Your changes are saved in this browser only. Resetting, deleting and importing data are turned off in the preview.</p></section>`;
+
+function modal(title,fields,fn,lock){const d=document.createElement('dialog');d.className='mdl';
+ d.innerHTML=`<form><h2>${title}</h2>${fields.map(([n,l,t,v,o,opt])=>`<label>${l}${t=='select'?`<select name=${n}>${o.map(x=>`<option>${esc(x)}</option>`).join('')}</select>`:`<input name=${n} type=${t||'text'} value="${esc(v??'')}" ${t=='number'?'step=any min=0':''} ${opt?'':'required'}>`}</label>`).join('')}<div class=mb>${lock?'':'<button type=button class=gh>Cancel</button>'}<button class=btn>Save</button></div></form>`;
+ const x=()=>{d.close();d.remove()};d.querySelector('form').onsubmit=e=>{e.preventDefault();fn(Object.fromEntries(new FormData(e.target)));x()};
+ if(!lock)d.querySelector('.gh').onclick=x;else d.oncancel=e=>e.preventDefault();document.body.appendChild(d);d.showModal()}
+A.qa=k=>{const t=today();
+ if(k=='task')modal('New task',[['t','Task'],['date','Date','date',t]],f=>{S.tasks.push({id:uid(),t:f.t.trim(),date:f.date,done:false,pri:'2'});save();draw()});
+ if(k=='exp')modal('Add expense',[['amt','Amount','number'],['t','Description'],['cat','Category','select','',CATS.filter(c=>c!='Salary')]],f=>{S.tx.push({id:uid(),d:t,t:f.t.trim(),amt:Math.abs(+f.amt),cat:f.cat,type:'out'});save();draw()});
+ if(k=='wt')modal('Log weight ('+S.wu+')',[['v','Weight','number']],f=>{const v=+f.v,kg=S.wu=='kg'?v:v/2.20462;S.wt=S.wt.filter(x=>x.d!=t);S.wt.push({d:t,kg});S.wt.sort((a,b)=>a.d.localeCompare(b.d));save();draw()});
+ if(k=='wo')modal('Log workout',[['t','Workout'],['min','Minutes','number']],f=>{S.work.unshift({id:uid(),d:t,t:f.t.trim(),min:+f.min||0,note:''});save();draw()})};
+A.name=v=>{S.name=v.trim();save();draw()};
+const NAV=[['Plan',[['dash','▦','Home'],['cal','▤','Calendar'],['blocks','◷','Time blocks'],['tasks','✓','Tasks']]],['Track',[['goals','◎','Goals'],['habits','↻','Habits'],['fit','♡','Fitness']]],['Life',[['bud','◈','Money'],['meals','◔','Meals']]]];
+function applyTheme(){const t=S.theme||'auto';document.documentElement.dataset.theme=t=='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t}
+A.theme=()=>{S.theme=document.documentElement.dataset.theme=='dark'?'light':'dark';save();applyTheme();draw()};
+const nb=([k,i,l])=>`<button class="${V.tab==k?'on':''}" onclick="A.tab('${k}')"><span>${i}</span><em>${l}</em></button>`;
+const TB=[['dash','▦','Home'],['cal','▤','Calendar'],['tasks','✓','Tasks'],['bud','◈','Money']];
+function sheet(t,items,fn){const d=document.createElement('dialog');d.className='mdl sheet';d.innerHTML=`<div class=si><h2>${t}</h2><div class=sg>${items.map(([k,i,l])=>`<button data-k="${k}"><span>${i}</span>${l}</button>`).join('')}</div></div>`;d.onclick=e=>{const b=e.target.closest('button');if(e.target==d||b){d.close();d.remove();b&&fn(b.dataset.k)}};document.body.appendChild(d);d.showModal()}
+A.more=()=>sheet('More',[['blocks','◷','Time blocks'],['goals','◎','Goals'],['habits','↻','Habits'],['fit','♡','Fitness'],['meals','◔','Meals'],['set','⚙','Settings'],['theme','◐','Light / Dark']],k=>k=='theme'?A.theme():A.tab(k));
+A.add=()=>sheet('Quick add',[['task','✅','Task'],['exp','💸','Expense'],['water','💧','Water'],['wt','⚖️','Weigh-in'],['wo','💪','Workout']],k=>k=='water'?A.wat(1):A.qa(k));
+A.goBud=x=>{V.sub.bud=x;A.tab('bud')};
+function draw(){const dk=document.documentElement.dataset.theme=='dark';
+$('#nav').innerHTML='<div class=lg><i>◐</i><em>Life Planner</em></div>'+NAV.map(([g,l])=>`<div class=gl>${g}</div>`+l.map(nb).join('')).join('')+'<div class=sp></div>'+nb(['set','⚙','Settings'])+`<button onclick="A.theme()" title="Toggle theme"><span>${dk?'☀':'☾'}</span><em>${dk?'Light':'Dark'} mode</em></button>`;
+$('#tabbar').innerHTML=TB.map(([k,i,l])=>`<button class="${V.tab==k?'on':''}" onclick="A.tab('${k}')"><span>${i}</span>${l}</button>`).join('')+`<button class="${TB.some(x=>x[0]==V.tab)?'':'on'}" onclick="A.more()"><span>☰</span>More</button>`;
+$('#app').innerHTML=PG[V.tab]()}
+
+function seed(){const t=today(),a=n=>add(t,n),L=(n,f)=>{const o={};for(let i=0;i<n;i++)if(f(i))o[a(-i)]=1;return o},id=()=>uid(),md=n=>iso(new Date(new Date().getFullYear(),new Date().getMonth(),Math.min(n,new Date().getDate()))),pm=n=>iso(new Date(new Date().getFullYear(),new Date().getMonth()-1,n)),all=[0,1,2,3,4,5,6],T=(x,d,pri,done)=>({id:id(),t:x,date:a(d),done:!!done,pri:String(pri||2)}),tdn={};tdn[t]=1;
+ const hp=(k,p)=>L(30,i=>((i*7+k*5+3)%10)<p);
+ const mealsRaw=[['Overnight oats','Chicken Caesar wrap','Salmon, rice & broccoli','Greek yogurt'],['Avocado toast & eggs','Quinoa veggie bowl','Beef stir-fry','Apple & almonds'],['Smoothie bowl','Tuna salad sandwich','Pasta primavera','Hummus & carrots'],['Scrambled eggs','Leftover pasta','Chicken curry & naan','Mixed berries'],['Porridge & banana','Lentil soup','Homemade pizza night','Popcorn'],['Pancakes','Brunch out','Grilled veg & halloumi','Dark chocolate'],['French toast','Sushi bowl','Roast chicken & potatoes','Fruit salad']],ws=wkStart(t),meals={};
+ mealsRaw.forEach((r,i)=>meals[add(ws,i)]={b:r[0],l:r[1],d:r[2],s:r[3]});
+ const tx=(d,t2,amt,cat,type)=>({id:id(),d,t:t2,amt,cat,type:type||'out'});
+ const water={};[5,8,7,6,8,8,7].forEach((v,i)=>water[a(i-6)]=v);water[t]=5;
+ const wt=[];for(let i=30;i>=0;i-=3)wt.push({d:a(-i),kg:+(74.8-(30-i)/30*2.5+(((i*37)%5)-2)*.15).toFixed(1)});
+ S=Object.assign({},D,{setup:1,demo:1,name:'Alex',cur:'$',wg:8,
+ tasks:[T('Finish project proposal',0,1),T('Call Mom',0,2,1),T('Clean out email inbox',0,3),T('Book dentist appointment',1),T('Pay electricity bill',2,1),T('Plan weekend hike',3),T('Buy birthday gift',4,3),T('Renew gym membership',-1,1),T('Submit expense report',-3,2,1),T('Reply to landlord',-2,2,1)],
+ rec:[['Morning stretch','07:00',all,1],['Take vitamins','08:00',all,1],['Team stand-up','09:30',[1,2,3,4,5]],['Gym workout','18:00',[1,3,5]],['Take out bins','20:00',[2,5]],['Meal prep','11:00',[0]],['Weekly review','17:00',[0]]].map(([x,tm2,d,dn])=>({id:id(),t:x,days:d,time:tm2,done:dn?Object.assign({},tdn):{}})),
+ goals:[{id:id(),t:'Read 12 books this year',target:12,cur:7,unit:'books',due:new Date().getFullYear()+'-12-31'},{id:id(),t:'Run 200 km',target:200,cur:84,unit:'km',due:a(60)},{id:id(),t:'Finish Spanish course',target:60,cur:22,unit:'lessons',due:a(90)},{id:id(),t:'Lose 5 kg',target:5,cur:2.5,unit:'kg',due:a(45)}],
+ habits:[['Drink 8 glasses of water',8],['Read 20 minutes',7],['Meditate',6],['Walk 8,000 steps',8],['No added sugar',5]].map(([x,p],k)=>({id:id(),t:x,log:hp(k,p)})),
+ blocks:{[t]:[['07:00','08:00','Morning routine'],['09:00','11:30','Deep work: proposal'],['12:00','13:00','Lunch & walk'],['14:00','15:30','Meetings'],['18:00','19:00','Gym workout'],['20:00','21:00','Read & unwind']].map(([s1,e,x])=>({id:id(),s:s1,e,t:x}))},
+ tx:[tx(md(1),'Salary',3200,'Salary','in'),tx(md(5),'Freelance project',450,'Salary','in'),tx(md(1),'Rent',950,'Housing'),tx(md(2),'Groceries',84.5,'Food'),tx(md(3),'Metro card',45,'Transport'),tx(md(4),'Internet & phone',68,'Bills'),tx(md(6),'Electricity',72,'Bills'),tx(md(7),'Dinner with friends',46,'Fun'),tx(md(8),'Groceries',63.2,'Food'),tx(md(9),'Pharmacy',22,'Health'),tx(md(10),'New running shoes',89,'Shopping'),tx(md(12),'Cinema',24,'Fun'),tx(md(13),'Groceries',71.8,'Food'),tx(md(14),'Fuel',38,'Transport'),tx(md(16),'Coffee & lunch',31,'Food'),tx(pm(1),'Salary',3200,'Salary','in'),tx(pm(1),'Rent',950,'Housing'),tx(pm(8),'Groceries',210,'Food'),tx(pm(15),'Weekend trip',160,'Fun'),tx(pm(20),'Utilities',140,'Bills')],
+ bud:{Housing:1000,Food:400,Transport:120,Fun:150,Shopping:200,Bills:220},
+ debts:[{id:id(),n:'Credit card',bal:2400,apr:19.9,min:75},{id:id(),n:'Car loan',bal:6800,apr:6.5,min:220},{id:id(),n:'Student loan',bal:9500,apr:4.5,min:110}],extra:150,
+ sav:[{id:id(),n:'Emergency fund',target:5000,cur:2350},{id:id(),n:'Vacation',target:1800,cur:760},{id:id(),n:'New laptop',target:1200,cur:540}],
+ meals,groc:['Milk','Eggs','Spinach','Chicken breast','Salmon fillets','Greek yogurt','Bananas','Oats','Olive oil','Rice'].map((x,i)=>({id:id(),t:x,done:i<3})),
+ work:[[0,'Run',35,'5 km easy pace'],[-2,'Strength',50,'Upper body'],[-4,'Yoga',40,'Evening flow'],[-6,'Cycling',60,'River trail'],[-8,'Run',30,'Intervals'],[-10,'Swim',30,'20 laps'],[-12,'HIIT',25,'Quick circuit']].map(([d,x,m,n])=>({id:id(),d:a(d),t:x,min:m,note:n})),
+ wt,water});save()}
+A.reset=A.imp=A.seed=A.fresh=()=>{};
+try{if(!localStorage.getItem(K))seed()}catch(e){seed()}
+applyTheme();draw();if(!S.setup)modal('Welcome. Let’s set up your planner.',[['name','Your name','text','','',1],['cur','Currency','select','',['$','€','£','¥','₹','Rs ','₦']]],f=>{S.name=f.name.trim();S.cur=f.cur;S.setup=1;save();draw()},1);
+if(!ok)toast('Browser storage is blocked, so changes will not persist.');
+</script></body></html>
